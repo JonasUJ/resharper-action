@@ -9,7 +9,7 @@ inputs:
     required: false
 runs:
   using: docker
-  image: docker://glassechidna/resharper-action
+  image: docker://jonasuj/resharper-action
   args:
     - sh
     - -c

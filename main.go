@@ -62,9 +62,9 @@ func dotnetRestore(slnPath string) {
 }
 
 func generateReport(slnPath string) string {
-	outPath := filepath.Join(os.TempDir(), "report.xml")
+	outPath := "report.xml"
 
-	cmd := exec.Command("inspectcode.sh", "--output="+outPath, slnPath)
+	cmd := exec.Command("/resharper/inspectcode.sh", "--output="+outPath, slnPath)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 
@@ -115,10 +115,12 @@ func printOutput(w io.Writer, report Report) {
 
 func severityToLevel(severity string) string {
 	switch severity {
-	case "WARNING", "ERROR":
+	case "ERROR":
 		return MessageLevelError
-	default:
+	case "WARNING":
 		return MessageLevelWarning
+	default:
+		return MessageLevelNotice
 	}
 }
 
